@@ -1,4 +1,4 @@
-plugin=TriggerTaskUpdate
+plugin=ReorderAction
 version=1.0.0
 
 all:

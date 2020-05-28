@@ -2,7 +2,18 @@
 
 Kanboard Plugin to reoder a column by automatic action
 
-Plugin for https://github.com/kanboard/kanboard
+Events:
+
+- Task created or updated
+- Task moved to another column
+
+Parameter:
+
+- Column
+- Criteria: Priority, Assignee, Due date
+- Direction: Ascending, Descending
+
+Plugin for <https://github.com/kanboard/kanboard>
 
 ## Author
 
