@@ -2,6 +2,11 @@
 
 Kanboard Plugin to reoder a column by automatic action
 
+Actions:
+
+- Reorder every column by defined criteria
+- Reorder a single column by defined criteria
+
 Events:
 
 - Task created or updated
@@ -14,7 +19,7 @@ _At the moment there is no useable event to combine the triggers, therefore the 
 Parameter:
 
 - Column
-- Criteria: Priority, Assignee, Due date
+- Criteria: Priority, Assignee, Assignee and priority, Due date
 - Direction: Ascending, Descending
 
 Plugin for <https://github.com/kanboard/kanboard>

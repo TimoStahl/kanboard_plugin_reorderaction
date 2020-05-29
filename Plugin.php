@@ -4,14 +4,16 @@ namespace Kanboard\Plugin\ReorderAction;
 
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Core\Translator;
-use Kanboard\Plugin\ReorderAction\Action\ReorderColumnAction;
+use Kanboard\Plugin\ReorderAction\Action\ReorderSingleColumnAction;
+use Kanboard\Plugin\ReorderAction\Action\ReorderEveryColumnAction;
 
 class Plugin extends Base
 {
     public function initialize()
     {
         //Actions
-        $this->actionManager->register(new ReorderColumnAction($this->container));
+        $this->actionManager->register(new ReorderSingleColumnAction($this->container));
+        $this->actionManager->register(new ReorderEveryColumnAction($this->container));
     }
     public function onStartup()
     {
