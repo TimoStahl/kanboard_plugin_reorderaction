@@ -6,6 +6,10 @@ Events:
 
 - Task created or updated
 - Task moved to another column
+- Task moved to another swimlane
+- Task assignee change
+
+_At the moment there is no useable event to combine the triggers, therefore the action should be configured multiple times._
 
 Parameter:
 

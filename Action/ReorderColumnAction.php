@@ -14,7 +14,7 @@ class ReorderColumnAction extends Base
      */
     public function getDescription()
     {
-        return t('Reorder a column if task changed');
+        return t('Reorder a specific column by defined criteria');
     }
 
     /**
@@ -27,6 +27,8 @@ class ReorderColumnAction extends Base
         return [
             TaskModel::EVENT_CREATE_UPDATE,
             TaskModel::EVENT_MOVE_COLUMN,
+            TaskModel::EVENT_MOVE_SWIMLANE,
+            TaskModel::EVENT_ASSIGNEE_CHANGE,
         ];
     }
 
@@ -39,8 +41,16 @@ class ReorderColumnAction extends Base
     {
         return [
             'column_id' => t('Column'),
-            'criteria' => [t('Priority'), t('Assignee'), t('Due date')],
-            'direction' => [t('Ascending'), t('Descending')],
+            'criteria' => [
+                'Priority' => t('Priority'), 
+                'Assignee' => t('Assignee'), 
+                'Assignee and priority' => t('Assignee and Priority'), 
+                'Due date' => t('Due date')
+            ],
+            'direction' => [
+                'Ascending' => t('Ascending'), 
+                'Descending' => t('Descending')
+            ],
         ];
     }
 
@@ -71,21 +81,25 @@ class ReorderColumnAction extends Base
     public function doAction(array $data)
     {
         $criteria = $this->getParam('criteria');
-        $direction = $this->getParam('direction') == 0 ? 'asc' : 'desc';
+        $direction = 'Ascending' == $this->getParam('direction') ? 'asc' : 'desc';
         $project_id = $data['task']['project_id'];
         $swimlane_id = $data['task']['swimlane_id'];
         $column_id = $data['task']['column_id'];
 
         switch ($criteria) {
-            case 0:
+            case 'Priority':
                 $this->taskReorderModel->reorderByPriority($project_id, $swimlane_id, $column_id, $direction);
 
                 break;
-            case 1:
+            case 'Assignee':
                 $this->taskReorderModel->reorderByAssignee($project_id, $swimlane_id, $column_id, $direction);
 
                 break;
-            case 2:
+            case 'Assignee and priority':
+                $this->taskReorderModel->reorderByAssigneeAndPriority($project_id, $swimlane_id, $column_id, $direction);
+
+                break;
+            case 'Due date':
                 $this->taskReorderModel->reorderByDueDate($project_id, $swimlane_id, $column_id, $direction);
 
                 break;
